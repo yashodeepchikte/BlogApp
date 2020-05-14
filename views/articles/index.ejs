@@ -1,0 +1,48 @@
+<%- include("../partials/_header") -%>
+<div class="container-fluid">
+    
+  
+    <%- include("../partials/messages.ejs") %>
+    <h1>Blog App</h1>
+    <a href="/dashboard/articles/new" class="btn btn-success">New Article</a>
+    <a href="/users/logout" class="btn btn-outline-danger" >Log Out</a>
+
+    <% articles.forEach(article => { %>
+
+        <div class= "card mt-4">
+            <div class="card-body">
+                <h1 class="card-title"> <%= article.title %> </h1>
+                <div class="card-subtitle mb-2 text-muted" >
+                  <%= article.createdAt.toLocaleDateString() %>
+                </div>
+                <div class="card-text mb-2">
+
+                <% if ( article.description.length >=100 ) { %>
+                  <h3> <%= article.description.slice(0,50) + "..." %> </h3>
+                <% }else{ %>
+                  <h3> <%= article.description %> </h3>
+                <% } %>
+
+
+
+
+                </div>
+            </div>
+
+            <form action="/dashboard/articles/delete" method="post">
+                <a href ="/dashboard/articles/<%= article._id %>" class="btn btn-primary mb-4 ml-1">Read More</a>
+                <a href ="/dashboard/articles/delete/<%= article._id%>" class="btn btn-danger mb-4 ml-1">Delete </a>
+                <a href ="/dashboard/articles/edit/<%= article._id %>" class="btn btn-info mb-4 ml-1"> Edit</a>
+                        
+            </form>
+
+        </div>
+
+
+
+
+   <% }) %>
+
+
+</div>
+<%- include("../partials/_footer") -%>

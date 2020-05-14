@@ -1,0 +1,12 @@
+<%- include("../partials/_header") -%>
+    <div class="container">
+
+        <div class=""> <h1><%= article.title %></h1></div>
+        <div class="text-muted mb-"> <%= article.createdAt.toLocaleDateString() %> </div>
+        <a href="/dashboard/<%= article.email %>" class="btn btn-secondary">All Articles</a>
+        <a href="/dashboard/articles/edit/<%= article._id %>" class="btn btn-info"> Edit</a>
+        <hr />
+        <div> <h5><%=  article.description %></h5> </div>
+        <div>  <%- article.sanatizedHTML %></div>
+    </div>
+<%- include("../partials/_footer") -%>
