@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {ensureAuthenticated} =require("../config/auth")
 const User = require("../models/Users")
-const Article = require("../models/Articles");
+const Article = require("../models/articles");
 const flash = require('connect-flash');
 const session = require('express-session');
 
@@ -22,7 +22,7 @@ router.get('/:email', ensureAuthenticated, (req, res) => {
       res.render("./articles/index", {articles : doc.articles})
     })
 });
-  
+
 // handelling new article
 router.get("/articles/new", (req, res) => {
     // console.log("i was triggered insinde the new route");
@@ -35,7 +35,7 @@ router.get("/articles/new", (req, res) => {
         }else{
             res.redirect("/users/login")
         }
-    })    
+    })
 })
 router.post("/articles/neww", async (req, res) => {
     User.findOne({email:email}, (err, doc) => {
@@ -89,11 +89,11 @@ router.get("/articles/delete/:id", (req, res) => {
                 console.log("Deleted successfully");
                 req.flash('success_msg', 'Article Deleted');
                 res.redirect("/dashboard/" + email);
-            })   
+            })
         }else{
             colsole.log("in delete the doc was not found");
         }
-    })    
+    })
 })
 
 
@@ -110,7 +110,7 @@ router.get("/articles/edit/:id", (req, res) => {
                     // console.log(article)
                     res.render("./articles/edit", {article:article});
                 }
-            }   
+            }
         }else{
             console.log("In the edit route empty doc was returned")
         }
@@ -135,7 +135,7 @@ router.post("/articles/edit", (req, res) => {
                         console.log("Updated successfully");
                         req.flash('success_msg', 'Article edited');
                         res.redirect("/dashboard/"+email);
-                    }) 
+                    })
             }
         }
         // console.log("out of the for loop")

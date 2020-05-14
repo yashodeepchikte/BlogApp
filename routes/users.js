@@ -48,7 +48,7 @@ router.post("/register", (req, res) => {
                   });
             }else{
                 const newUser = new User({name:name, email:email, password:password});
-                
+
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
@@ -64,10 +64,10 @@ router.post("/register", (req, res) => {
                         .catch(err => console.log(err));
 
                     });
-                        
+
                 });
             }
-            })        
+            })
     }
 })
 
@@ -75,7 +75,7 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res, next) => {
     // console.log("login",req.body)
     const email = req.body.email;
-    
+
     // console.log("email:", email)
     passport.authenticate('local', {
         successRedirect:"/dashboard/" + email ,
